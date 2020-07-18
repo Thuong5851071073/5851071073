@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QUANLYSIEUTHIModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'QUANLYSIEUTHI.dbo.CTHD' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CTHD">
+          <Property Name="IDhang" Type="int" />
+          <Property Name="IDhoadon" Type="int" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="Gia" Type="int" />
+          <Property Name="Thanhtien" Type="int" />
+          <Property Name="sothutu" Type="int" />
+        </EntityType>-->
+  <EntityType Name="CTPN">
+    <Key>
+      <PropertyRef Name="IDhang" />
+      <PropertyRef Name="IDphieunhap" />
+    </Key>
+    <Property Name="IDhang" Type="int" Nullable="false" />
+    <Property Name="IDphieunhap" Type="int" Nullable="false" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="Gia" Type="money" />
+    <Property Name="ThanhTien" Type="money" />
+    <Property Name="sothutu" Type="int" />
+  </EntityType>
+  <EntityType Name="CTPX">
+    <Key>
+      <PropertyRef Name="IDhang" />
+      <PropertyRef Name="IDphieuxuat" />
+    </Key>
+    <Property Name="IDhang" Type="int" Nullable="false" />
+    <Property Name="IDphieuxuat" Type="int" Nullable="false" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="Tenhang" Type="nvarchar" MaxLength="50" />
+    <Property Name="Thanhtien" Type="int" />
+    <Property Name="sothutu" Type="int" />
+    <Property Name="Gia" Type="int" />
+  </EntityType>
+  <EntityType Name="Donvitinh">
+    <Key>
+      <PropertyRef Name="Sothutu" />
+    </Key>
+    <Property Name="Sothutu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tengoidonvi" Type="nvarchar" MaxLength="50" />
+    <Property Name="soluongdonvi" Type="int" />
+  </EntityType>
+  <EntityType Name="HoaDon">
+    <Key>
+      <PropertyRef Name="IDhoadon" />
+    </Key>
+    <Property Name="IDhoadon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayLap" Type="smalldatetime" />
+    <Property Name="IDkhach" Type="int" />
+    <Property Name="TongTien" Type="int" />
+    <Property Name="Tinhtrang" Type="nvarchar" MaxLength="50" />
+    <Property Name="manguidung" Type="int" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="IDkhach" />
+    </Key>
+    <Property Name="IDkhach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenKhach" Type="nvarchar" MaxLength="50" />
+    <Property Name="SDT" Type="int" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+error 6004: The table 'QUANLYSIEUTHI.dbo.CTHD' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_CTHD_donvitinh" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'QUANLYSIEUTHI.dbo.CTHD' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_CTHD_Hoadon" />-->
+  <Association Name="FK_CTPN_Donvitinh">
+    <End Role="Donvitinh" Type="Self.Donvitinh" Multiplicity="0..1" />
+    <End Role="CTPN" Type="Self.CTPN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Donvitinh">
+        <PropertyRef Name="Sothutu" />
+      </Principal>
+      <Dependent Role="CTPN">
+        <PropertyRef Name="sothutu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPX_Donvitinh">
+    <End Role="Donvitinh" Type="Self.Donvitinh" Multiplicity="0..1" />
+    <End Role="CTPX" Type="Self.CTPX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Donvitinh">
+        <PropertyRef Name="Sothutu" />
+      </Principal>
+      <Dependent Role="CTPX">
+        <PropertyRef Name="sothutu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HoaDon_KhachHang">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+    <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="IDkhach" />
+      </Principal>
+      <Dependent Role="HoaDon">
+        <PropertyRef Name="IDkhach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QUANLYSIEUTHIModel1StoreContainer">
+    <EntitySet Name="CTPN" EntityType="Self.CTPN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTPX" EntityType="Self.CTPX" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Donvitinh" EntityType="Self.Donvitinh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CTPN_Donvitinh" Association="Self.FK_CTPN_Donvitinh">
+      <End Role="Donvitinh" EntitySet="Donvitinh" />
+      <End Role="CTPN" EntitySet="CTPN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPX_Donvitinh" Association="Self.FK_CTPX_Donvitinh">
+      <End Role="Donvitinh" EntitySet="Donvitinh" />
+      <End Role="CTPX" EntitySet="CTPX" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HoaDon_KhachHang" Association="Self.FK_HoaDon_KhachHang">
+      <End Role="KhachHang" EntitySet="KhachHang" />
+      <End Role="HoaDon" EntitySet="HoaDon" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

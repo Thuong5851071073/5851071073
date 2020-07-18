@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QUANLYSIEUTHIModelStoreContainer" CdmEntityContainer="QUANLYSIEUTHIEntities1">
+    <EntitySetMapping Name="HoaDons">
+      <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.HoaDon">
+        <MappingFragment StoreEntitySet="HoaDon">
+          <ScalarProperty Name="IDhoadon" ColumnName="IDhoadon" />
+          <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+          <ScalarProperty Name="IDkhach" ColumnName="IDkhach" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+          <ScalarProperty Name="Tinhtrang" ColumnName="Tinhtrang" />
+          <ScalarProperty Name="manguidung" ColumnName="manguidung" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

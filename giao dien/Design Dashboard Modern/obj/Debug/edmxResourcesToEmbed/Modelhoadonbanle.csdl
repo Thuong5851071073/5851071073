@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QUANLYSIEUTHIModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CTPN">
+    <Key>
+      <PropertyRef Name="IDhang" />
+      <PropertyRef Name="IDphieunhap" />
+    </Key>
+    <Property Name="IDhang" Type="Int32" Nullable="false" />
+    <Property Name="IDphieunhap" Type="Int32" Nullable="false" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="Gia" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ThanhTien" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="sothutu" Type="Int32" />
+    <NavigationProperty Name="Donvitinh" Relationship="Self.FK_CTPN_Donvitinh" FromRole="CTPN" ToRole="Donvitinh" />
+  </EntityType>
+  <EntityType Name="CTPX">
+    <Key>
+      <PropertyRef Name="IDhang" />
+      <PropertyRef Name="IDphieuxuat" />
+    </Key>
+    <Property Name="IDhang" Type="Int32" Nullable="false" />
+    <Property Name="IDphieuxuat" Type="Int32" Nullable="false" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="Tenhang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Thanhtien" Type="Int32" />
+    <Property Name="sothutu" Type="Int32" />
+    <Property Name="Gia" Type="Int32" />
+    <NavigationProperty Name="Donvitinh" Relationship="Self.FK_CTPX_Donvitinh" FromRole="CTPX" ToRole="Donvitinh" />
+  </EntityType>
+  <EntityType Name="Donvitinh">
+    <Key>
+      <PropertyRef Name="Sothutu" />
+    </Key>
+    <Property Name="Sothutu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tengoidonvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="soluongdonvi" Type="Int32" />
+    <NavigationProperty Name="CTPNs" Relationship="Self.FK_CTPN_Donvitinh" FromRole="Donvitinh" ToRole="CTPN" />
+    <NavigationProperty Name="CTPXes" Relationship="Self.FK_CTPX_Donvitinh" FromRole="Donvitinh" ToRole="CTPX" />
+  </EntityType>
+  <EntityType Name="HoaDon">
+    <Key>
+      <PropertyRef Name="IDhoadon" />
+    </Key>
+    <Property Name="IDhoadon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NgayLap" Type="DateTime" Precision="0" />
+    <Property Name="IDkhach" Type="Int32" />
+    <Property Name="TongTien" Type="Int32" />
+    <Property Name="Tinhtrang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="manguidung" Type="Int32" />
+    <NavigationProperty Name="KhachHang" Relationship="Self.FK_HoaDon_KhachHang" FromRole="HoaDon" ToRole="KhachHang" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="IDkhach" />
+    </Key>
+    <Property Name="IDkhach" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenKhach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="Int32" />
+    <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HoaDons" Relationship="Self.FK_HoaDon_KhachHang" FromRole="KhachHang" ToRole="HoaDon" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_CTPN_Donvitinh">
+    <End Role="Donvitinh" Type="Self.Donvitinh" Multiplicity="0..1" />
+    <End Role="CTPN" Type="Self.CTPN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Donvitinh">
+        <PropertyRef Name="Sothutu" />
+      </Principal>
+      <Dependent Role="CTPN">
+        <PropertyRef Name="sothutu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPX_Donvitinh">
+    <End Role="Donvitinh" Type="Self.Donvitinh" Multiplicity="0..1" />
+    <End Role="CTPX" Type="Self.CTPX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Donvitinh">
+        <PropertyRef Name="Sothutu" />
+      </Principal>
+      <Dependent Role="CTPX">
+        <PropertyRef Name="sothutu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HoaDon_KhachHang">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+    <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="IDkhach" />
+      </Principal>
+      <Dependent Role="HoaDon">
+        <PropertyRef Name="IDkhach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QUANLYSIEUTHIEntities4" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CTPNs" EntityType="Self.CTPN" />
+    <EntitySet Name="CTPXes" EntityType="Self.CTPX" />
+    <EntitySet Name="Donvitinhs" EntityType="Self.Donvitinh" />
+    <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
+    <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_CTPN_Donvitinh" Association="Self.FK_CTPN_Donvitinh">
+      <End Role="Donvitinh" EntitySet="Donvitinhs" />
+      <End Role="CTPN" EntitySet="CTPNs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPX_Donvitinh" Association="Self.FK_CTPX_Donvitinh">
+      <End Role="Donvitinh" EntitySet="Donvitinhs" />
+      <End Role="CTPX" EntitySet="CTPXes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HoaDon_KhachHang" Association="Self.FK_HoaDon_KhachHang">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="HoaDon" EntitySet="HoaDons" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

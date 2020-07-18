@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2c837be51df54930b0c2b1570156009f" Name="Diagram1">
+        <EntityTypeShape EntityType="QUANLYSIEUTHIModel1.CTPN" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYSIEUTHIModel1.CTPX" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYSIEUTHIModel1.Donvitinh" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYSIEUTHIModel1.HoaDon" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYSIEUTHIModel1.KhachHang" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYSIEUTHIModel1.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="QUANLYSIEUTHIModel1.FK_CTPN_Donvitinh" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYSIEUTHIModel1.FK_CTPX_Donvitinh" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLYSIEUTHIModel1.FK_HoaDon_KhachHang" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

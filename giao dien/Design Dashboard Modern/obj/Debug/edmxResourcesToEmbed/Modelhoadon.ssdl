@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QUANLYSIEUTHIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="HoaDon">
+    <Key>
+      <PropertyRef Name="IDhoadon" />
+    </Key>
+    <Property Name="IDhoadon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayLap" Type="smalldatetime" />
+    <Property Name="IDkhach" Type="int" />
+    <Property Name="TongTien" Type="money" />
+    <Property Name="Tinhtrang" Type="nvarchar" MaxLength="50" />
+    <Property Name="manguidung" Type="int" />
+  </EntityType>
+  <EntityContainer Name="QUANLYSIEUTHIModelStoreContainer">
+    <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
